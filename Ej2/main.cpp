@@ -1,5 +1,5 @@
-﻿// Nombre del alumno .....
-// Usuario del Juez ......
+﻿// Nombre del alumno: Pablo Lopez Martin
+// Usuario del Juez: E-40
 
 
 #include <iostream>
@@ -10,9 +10,23 @@
 using namespace std;
 
 // función que resuelve el problema
-bool resolver(vector<int> datos) {
+bool resolver(vector<int> datos, int p) {
+    bool sol = false;
+    int max1 = datos[0];
+    int min2 = datos[p+1];
 
-    return true;
+    int i = 0;
+    while (i <= p) {
+        if (datos[i] > max1) max1 = datos[i];
+        i++;
+    }
+    int j = p + 1;
+    while(j < datos.size()) {
+        if (datos[j] <= min2) min2 = datos[j];
+        j++;
+    }
+    if (max1 < min2) sol = true;
+    return sol;
 }
 
 // Resuelve un caso de prueba, leyendo de la entrada la
@@ -29,12 +43,15 @@ void resuelveCaso() {
     vector<int> v(numEle);
     for (int& x : v)
     cin >> x;
-
-    bool sol = resolver(v);
+    if (p )
+    bool sol = resolver(v, pos);
     // escribir sol
-
-
-
+    if (sol) {
+        cout << "SI" << endl;
+    }
+    else {
+        cout << "NO" << endl;
+    }
 }
 
 int main() {
