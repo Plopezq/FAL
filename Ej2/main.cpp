@@ -16,12 +16,12 @@ bool resolver(vector<int> datos, int p) {
     int min2 = datos[p+1];
 
     int i = 0;
-    while (i <= p) {
+    while (i <= p) { //Bucle desde la componente 0 hasta p
         if (datos[i] > max1) max1 = datos[i];
         i++;
     }
     int j = p + 1;
-    while(j < datos.size()) {
+    while(j < datos.size()) { //Bucle desde p+1 hasta el final
         if (datos[j] <= min2) min2 = datos[j];
         j++;
     }
@@ -43,8 +43,10 @@ void resuelveCaso() {
     vector<int> v(numEle);
     for (int& x : v)
     cin >> x;
-    if (p )
-    bool sol = resolver(v, pos);
+    bool sol = true;
+    if (pos < (numEle-1) ) {
+        sol = resolver(v, pos);
+    }
     // escribir sol
     if (sol) {
         cout << "SI" << endl;
