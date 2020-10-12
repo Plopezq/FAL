@@ -1,4 +1,4 @@
-// Nombre y apellidos del alumno: Pablo Lopez MArtín
+// Nombre y apellidos del alumno: Pablo Lopez Martín
 // Usuario del juez de clase: E40
 
 #include <iostream>
@@ -17,6 +17,7 @@ using namespace std;
 };
 // Explicación del algoritmo utilizado
 
+
 // Coste del algoritmo utilizado
 
 
@@ -27,15 +28,27 @@ using namespace std;
 tSol resolver(vector <int> const& v) {
     // Inicialización de variables
     tSol solucion;
+    solucion.num = 1;
+    solucion.sum += v[0];
+    int valorMin = v[0];
+    int numMin = 1;
     // Codigo del alumno
     
-    for (int i = 1; i < v.size(); ++i) {
-        
+    for (int i = 1; i < v.size(); ++i) { //Cambio de i = 1 a i = 0
         // Aqui el código del alumno
         // No deben hacerse más bucles
-
-        
+        if (v[i] < valorMin) {
+            valorMin = v[i];
+            numMin = 1;
+        }else if (v[i]==valorMin) {
+            numMin++;
+        }
+        solucion.num++;
+        solucion.sum += v[i];
     }
+    solucion.num -= numMin;
+    solucion.sum -= (numMin * valorMin);
+
     return solucion;
 }
 
