@@ -11,15 +11,15 @@ using namespace std;
 
 
 
-typedef struct {
+struct tAnyo{
     int inicio = -1;
     int fin = -1;
-}tAnyo;
+};
 
 // función que resuelve el problema
 vector<int> resolver(vector<int> const &v, tAnyo const &años) {
 
-
+    return v;
 }
 
 // Resuelve un caso de prueba, leyendo de la entrada la
@@ -32,9 +32,15 @@ void resuelveCaso() {
     cin >> anyos.fin;
 
     int aux = 1;
-    aux+= (anyos.inicio - anyos.fin);
+    aux+= (anyos.fin - anyos.inicio);
 
     vector<int> v(aux);
+
+    int i = 0;
+    while (i < aux) {
+        cin >> v[i];
+        i++;
+    }
 
     vector<int> sol = resolver(v, anyos);
     // escribir sol
@@ -46,7 +52,7 @@ int main() {
     // Para la entrada por fichero.
     // Comentar para acepta el reto
 #ifndef DOMJUDGE
-    std::ifstream in("datos.txt");
+    std::ifstream in("05sample.in");
     auto cinbuf = std::cin.rdbuf(in.rdbuf()); //save old buf and redirect std::cin to casos.txt
 #endif 
 
