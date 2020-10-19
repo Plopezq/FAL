@@ -17,9 +17,18 @@ struct tAnyo{
 };
 
 // función que resuelve el problema
-vector<int> resolver(vector<int> const &v, tAnyo const &años) {
-
-    return v;
+vector<int> resolver(vector<int> const &v, tAnyo const &anyos) {
+    vector<int> sol; //Vector que se devuelve
+    long int ventaMax = v[0]; //Venta maxima
+    int i = 0; //Iterator
+    while (i < v.size()) {
+        if (v[i] > ventaMax) {
+            sol.push_back(anyos.inicio + i);
+            ventaMax = v[i];
+        }
+        i++;
+    }
+    return sol;
 }
 
 // Resuelve un caso de prueba, leyendo de la entrada la
@@ -27,7 +36,6 @@ vector<int> resolver(vector<int> const &v, tAnyo const &años) {
 void resuelveCaso() {
     // leer los datos de la entrada
     tAnyo anyos;
-
     cin >> anyos.inicio;
     cin >> anyos.fin;
 
@@ -44,7 +52,12 @@ void resuelveCaso() {
 
     vector<int> sol = resolver(v, anyos);
     // escribir sol
-
+    int z = 0;
+    while(z < sol.size() ){
+        cout << sol[z] << " ";
+        z++;
+    }
+    cout << endl;
 
 }
 
