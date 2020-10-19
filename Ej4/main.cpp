@@ -1,6 +1,7 @@
 // Nombre del estudiante: Pablo Lopez Martin
 // Usuario del juez: E40
 
+using namespace std;
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -12,23 +13,37 @@
 
 std::vector<int> resolver(std::vector<int>const& v1, std::vector<int>const& v2) {
     // Declaración de variables
+    int pos1 = 0, pos2 = 0, pos3 = 0;
     // Codigo del alumno
-        //Recibo 2 vectores desordenados y tengo que devolver 1 vector ordenado
+        //Recibo 2 vectores ordenados y tengo que devolver 1 vector ordenado
+    int n3 = v1.size() + v2.size();
+    vector<int> sol();
 
-    while (i < v1.size() && j < v2.size()) {
+    while (pos1 < v1.size() && pos2 < v2.size()) {
         // Aqui codigo del alumno
-
+        if (v1[pos1] < v2[pos2] && v1[pos1] != sol[pos3 - 1 ]) {
+            sol[pos3] = v1[pos1];
+            pos1++;
+        }
+        else {
+            sol[pos3] = v2[pos2];
+            pos2++;
+        }
+        pos3++;
 
     }
-    while (i < v1.size()) {
+    while (pos1 < v1.size()) {
         // Aqui codigo del alumno
-
+        sol[pos3] = v1[pos1];
+        pos1++;
+        pos3++;
         
     }
-    while (j < v2.size()) {
+    while (pos2 < v2.size()) {
         // Aqui codigo del alumno
-
-
+        sol[pos3] = v2[pos2];
+        pos2++;
+        pos3++;
     }
     return sol;
 }
