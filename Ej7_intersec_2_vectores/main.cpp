@@ -10,8 +10,10 @@ using namespace std;
 
 // función que resuelve el problema
 vector<int> resolver(vector<int> const& v1, vector<int> const& v2) {
+    vector<int> sol;
 
 
+    return sol;
 }
 
 // Resuelve un caso de prueba, leyendo de la entrada la
@@ -32,7 +34,7 @@ void resuelveCaso() {
         v2.push_back(aux);
     }
 
-    vector<int> sol = resolver(vector<int> const& v1, vector<int> const& v2);
+    vector<int> sol = resolver(v1, v2);
     // escribir sol
 
 
