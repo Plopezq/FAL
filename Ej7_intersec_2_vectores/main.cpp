@@ -7,37 +7,83 @@ using namespace std;
 #include <fstream>
 #include <vector>
 
-
+void ordena(vector<int>& vector) {
+    int n = vector.size();
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = i + 1; j < n; j++) {
+            if (vector[i] > vector[j]) {
+                int aux = vector[i];
+                vector[i] = vector[j];
+                vector[j] = aux;
+            }
+        }
+    }
+}
 // función que resuelve el problema
-vector<int> resolver(vector<int> const& v1, vector<int> const& v2) {
+vector<int> resolver(vector<int> & v1, vector<int> & v2) {
     vector<int> sol;
+    //Ordeno lista 1
+    ordena(v1);
+    //ordeno lista 2
+    ordena(v2);
+    int pos1 = 0, pos2 = 0;
+    while (pos1 < v1.size() && pos2 < v2.size()) {
+        // Aqui codigo del alumno
+        if (v1[pos1] < v2[pos2]) { //Si no es igual, avanzo en el vector 1
+            pos1++;
+        }
+        else if (v1[pos1] > v2[pos2]) { //Si no es igual, avanzo en el vector 2
++            pos2++;
+        }
+        else if (v1[pos1] == v2[pos2]) { //En caso de ser iguales, HAY intersección y cojo el valor
+            sol.push_back(v1[pos1]);
+            pos1++;
+            pos2++;
+        }
+    }
 
 
     return sol;
 }
 
-// Resuelve un caso de prueba, leyendo de la entrada la
+// Resuelve un caso dSe prueba, leyendo de la entrada la
 // configuración, y escribiendo la respuesta
 void resuelveCaso() {
     // leer los datos de la entrada
     vector<int> v1;
     vector<int> v2;
+    bool fin = false;
 
-    while (v1[v1.size()] != 0) { //Lectura del vector 1
+    while (!fin) { //Lectura del vector 1
         int aux;
         cin >> aux;
-        v1.push_back(aux);
+        if (aux == 0) {
+            fin = true;
+        }
+        else {
+            v1.push_back(aux);
+        }
     }
-    while (v2[v2.size()] != 0) { //Lectura del vector 2
+    fin = false;
+    while (!fin) { //Lectura del vector 2
         int aux;
         cin >> aux;
-        v2.push_back(aux);
+        if (aux == 0) {
+            fin = true;
+        }
+        else {
+            v2.push_back(aux);
+        }
     }
 
     vector<int> sol = resolver(v1, v2);
     // escribir sol
-
-
+    int contador = 0;
+    while (contador < sol.size() ) {
+        cout << sol[contador] << " ";
+        contador++;
+    }
+    cout << endl;
 }
 
 int main() {
