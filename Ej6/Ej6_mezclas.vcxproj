@@ -24,6 +24,7 @@
     <ProjectGuid>{037d8c7d-6d5f-4dcd-926a-d70ff03e54a0}</ProjectGuid>
     <RootNamespace>Ej6mezclas</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Ej6_mezclas_vector_de_acumulados</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

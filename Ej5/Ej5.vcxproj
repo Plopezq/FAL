@@ -24,6 +24,7 @@
     <ProjectGuid>{a87e23ed-2ee6-4c2e-b866-b40368dc38e9}</ProjectGuid>
     <RootNamespace>Ej5</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Ej5_evolucion_de_beneficios</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
