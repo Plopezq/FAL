@@ -8,10 +8,11 @@
 #include <string>
 #include <cmath>
 #include <iomanip>
+using namespace std;
 
 using lli = long long int;
 // Calcula un vector con los valores acumulados
-void resolver(std::vector<int> const& a, std::vector<lli>& v)
+void resolver(std::vector<int> const& a, std::vector<lli>& v, int const f1, int const f2)
 {
    // Aqui codigo del estudiante
 
@@ -24,19 +25,27 @@ bool resuelveCaso() {
     int a1, a2;
     std::cin >> a1 >> a2;
     if (a1 == 0 && a2 == 0) return false;
-
-    // Lee el resto de los datos y calcula el vector de acumulados
-
-    // Aqui código del estudiante
-
+        // Lee el resto de los datos y calcula el vector de acumulados
+    int numAnyos = a2 - a1 + 1;
+    vector<int> v; //Vector de los nacimientos ocurridos durante esos anyos
+    int i = 0;
+    while (i < numAnyos) { //Lectura del vector
+        int aux;
+        cin >> aux;
+        v.push_back(aux);
+        i++;
+    }
     // Lectura de las preguntas
     int m; std::cin >> m;
+    vector<lli> va;
     for (int i = 0; i < m; ++i) {
         int f1, f2;
         std::cin >> f1 >> f2;
         // Escribir la respuesta
-        
-        // Aqui codigo del estudiante
+        resolver(v, va, f1, f2);
+
+
+
     }
     std::cout << "---\n";
 
@@ -49,7 +58,7 @@ int main() {
     // Comentar para acepta el reto
     
 #ifndef DOMJUDGE
-    std::ifstream in("datos.txt");
+    std::ifstream in("06sample.in");
     auto cinbuf = std::cin.rdbuf(in.rdbuf()); //save old buf and redirect std::cin to casos.txt
 #endif
 

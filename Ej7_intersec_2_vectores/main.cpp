@@ -12,7 +12,7 @@ void ordena(vector<int>& vector) {
     for (int i = 0; i < n - 1; i++) {
         for (int j = i + 1; j < n; j++) {
             if (vector[i] > vector[j]) {
-                int aux = vector[i];
+                unsigned long int aux = vector[i];
                 vector[i] = vector[j];
                 vector[j] = aux;
             }
@@ -41,8 +41,6 @@ vector<int> resolver(vector<int> & v1, vector<int> & v2) {
             pos2++;
         }
     }
-
-
     return sol;
 }
 
@@ -55,7 +53,7 @@ void resuelveCaso() {
     bool fin = false;
 
     while (!fin) { //Lectura del vector 1
-        int aux;
+        unsigned long int aux;
         cin >> aux;
         if (aux == 0) {
             fin = true;
@@ -66,7 +64,7 @@ void resuelveCaso() {
     }
     fin = false;
     while (!fin) { //Lectura del vector 2
-        int aux;
+        unsigned long int aux;
         cin >> aux;
         if (aux == 0) {
             fin = true;
