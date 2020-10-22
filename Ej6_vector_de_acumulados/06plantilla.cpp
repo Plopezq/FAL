@@ -12,11 +12,16 @@ using namespace std;
 
 using lli = long long int;
 // Calcula un vector con los valores acumulados
-void resolver(std::vector<int> const& a, std::vector<lli>& v, int const f1, int const f2)
-{
-   // Aqui codigo del estudiante
-
-
+void resolver(std::vector<int> const& a, std::vector<lli>& v, int const f1, int const f2, int const fi){
+    //Posicion inicial
+    int posIni = f1 - fi;
+    int posFin = f2 - fi;
+    long long int aux = 0;
+    while (posIni <= posFin) {
+        aux += a[posIni];
+        posIni++;
+    }
+    v.push_back(aux);
 }
 // Resuelve un caso de prueba, leyendo de la entrada la
 // configuración, y escribiendo la respuesta
@@ -25,7 +30,7 @@ bool resuelveCaso() {
     int a1, a2;
     std::cin >> a1 >> a2;
     if (a1 == 0 && a2 == 0) return false;
-        // Lee el resto de los datos y calcula el vector de acumulados
+    // Lee el resto de los datos y calcula el vector de acumulados
     int numAnyos = a2 - a1 + 1;
     vector<int> v; //Vector de los nacimientos ocurridos durante esos anyos
     int i = 0;
@@ -37,22 +42,18 @@ bool resuelveCaso() {
     }
     // Lectura de las preguntas
     int m; std::cin >> m;
-    vector<lli> va;
+    vector<lli> va; //Vector de acumulados (de los nacimientos) 
     for (int i = 0; i < m; ++i) {
         int f1, f2;
         std::cin >> f1 >> f2;
         // Escribir la respuesta
-        resolver(v, va, f1, f2);
-
-
-
+        resolver(v, va, f1, f2, a1);
+        cout << va[i] << endl;
     }
     std::cout << "---\n";
 
     return true;
-    
 }
-
 int main() {
     // Para la entrada por fichero.
     // Comentar para acepta el reto
@@ -61,8 +62,6 @@ int main() {
     std::ifstream in("06sample.in");
     auto cinbuf = std::cin.rdbuf(in.rdbuf()); //save old buf and redirect std::cin to casos.txt
 #endif
-
-    
     while (resuelveCaso())
         ;
     
