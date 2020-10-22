@@ -5,27 +5,18 @@ using namespace std;
 #include <iostream>
 #include <iomanip>
 #include <fstream>
+#include <algorithm>
 #include <vector>
 
-void ordena(vector<int>& vector) {
-    int n = vector.size();
-    for (int i = 0; i < n - 1; i++) {
-        for (int j = i + 1; j < n; j++) {
-            if (vector[i] > vector[j]) {
-                unsigned long int aux = vector[i];
-                vector[i] = vector[j];
-                vector[j] = aux;
-            }
-        }
-    }
-}
+
 // función que resuelve el problema
 vector<int> resolver(vector<int> & v1, vector<int> & v2) {
     vector<int> sol;
     //Ordeno lista 1
-    ordena(v1);
+    sort(v1.begin(), v1.end());
     //ordeno lista 2
-    ordena(v2);
+    sort(v2.begin(), v2.end());
+
     int pos1 = 0, pos2 = 0;
     while (pos1 < v1.size() && pos2 < v2.size()) {
         // Aqui codigo del alumno
