@@ -12,16 +12,15 @@ using namespace std;
 
 using lli = long long int;
 // Calcula un vector con los valores acumulados
-void resolver(std::vector<int> const& a, std::vector<lli>& v, int const f1, int const f2, int const fi){
+void resolver(std::vector<int>const& v, std::vector<lli> & va){ //Calculo del vector de acumulados
     //Posicion inicial
-    int posIni = f1 - fi;
-    int posFin = f2 - fi;
     long long int aux = 0;
-    while (posIni <= posFin) {
-        aux += a[posIni];
-        posIni++;
+    int pos = 0;
+    while (pos < v.size() ){
+        aux += v[pos];
+        va.push_back(aux);
+        pos++;
     }
-    v.push_back(aux);
 }
 // Resuelve un caso de prueba, leyendo de la entrada la
 // configuración, y escribiendo la respuesta
@@ -42,13 +41,20 @@ bool resuelveCaso() {
     }
     // Lectura de las preguntas
     int m; std::cin >> m;
-    vector<lli> va; //Vector de acumulados (de los nacimientos) 
-    for (int i = 0; i < m; ++i) {
+    vector<lli> va; //Vector de acumulados (de los nacimientos)
+    resolver(v, va); //Calculo el vector de acumulados
+    for (int i = 0; i < m; ++i) { //Recorro las preguntas
         int f1, f2;
         std::cin >> f1 >> f2;
-        // Escribir la respuesta
-        resolver(v, va, f1, f2, a1);
-        cout << va[i] << endl;
+        lli resul;
+        if (a1 == f1) {
+            resul = va[f2 - a1];
+        }
+        else {
+            resul = va[f2 - a1] - va[f1 - a1 - 1];
+        }
+
+        cout << resul << endl;
     }
     std::cout << "---\n";
 
