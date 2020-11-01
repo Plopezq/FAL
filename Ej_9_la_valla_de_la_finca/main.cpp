@@ -10,21 +10,31 @@
 using namespace std;
 // función que resuelve el problema
 int resolver(vector<int> const& valla, int const intervalo) {
-    int p = 0;  //Posicion inicial del intervalo
+    int p = -1;  //Posicion inicial del intervalo
+    bool agu = false; //Nos dice si la variable tiene algun agujero o no
     int agujeros = 0; //Agujeros del intervalo
-
-    for (int i = 0; i < intervalo; ++i) { //Recorro el primer intervalo 0-3
-        if (valla[i] == 0) { //Necesita ser arreglada
+    int cont = 0;
+    for (int i = 0; i < intervalo; ++i) { //Recorro el primer intervalo
+        if (valla[i] == 0) { //Necesita ser arreglada en ese intervalo
+            agu = true;
+            p = 0;
             ++agujeros;
         }
     }
-    for (int z = intervalo; intervalo < valla.size(); ++z) {
-        if (valla[z] == 0) { //Hay un agujero más a la derecha
-            p = z - intervalo; //Actualizo el comienzo del intervalo
-            ++agujeros;
-        } //else -> si no hay agujero, no hacemos nada
-        if (valla[z - intervalo] == 1) { //Si hemos perdido 1 agujero
+    cont = agujeros; //Cont = los agujeros del intervalo inicial
+    for (int z = intervalo; z < valla.size(); ++z) {
+        //Miro por la izq, si pierdo un agujero, lo resto
+        if (valla[z - intervalo] == 0) {
             --agujeros;
+            agu = true;
+        }
+        //Miro por la derecha y si hay un agujero más a la derecha, lo sumo
+        if (valla[z] == 0) { 
+            agu = true;
+            ++agujeros;
+        }
+        if (agujeros >= cont && agu) { //Si este intervalo es mejor, actualizo la posicion, sino no
+            p = z - intervalo + 1; //Actualizo el comienzo del intervalo, ya que este es mejor
         }
     }
     return p;
