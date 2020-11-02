@@ -12,8 +12,8 @@ using namespace std;
 int resolver(vector<int> const& valla, int const intervalo) {
     int p = -1;  //Posicion inicial del intervalo
     bool agu = false; //Nos dice si la variable tiene algun agujero o no
-    int agujeros = 0; //Agujeros del intervalo
-    int cont = 0;
+    long int agujeros = 0; //Agujeros del intervalo
+    long int max = 0; //Numero máximo de agujeros
     for (int i = 0; i < intervalo; ++i) { //Recorro el primer intervalo
         if (valla[i] == 0) { //Necesita ser arreglada en ese intervalo
             agu = true;
@@ -21,7 +21,7 @@ int resolver(vector<int> const& valla, int const intervalo) {
             ++agujeros;
         }
     }
-    cont = agujeros; //Cont = los agujeros del intervalo inicial
+    max = agujeros; //max = los agujeros del intervalo inicial (maximo de agujeros hasta ahora)
     for (int z = intervalo; z < valla.size(); ++z) {
         //Miro por la izq, si pierdo un agujero, lo resto
         if (valla[z - intervalo] == 0) {
@@ -33,27 +33,27 @@ int resolver(vector<int> const& valla, int const intervalo) {
             agu = true;
             ++agujeros;
         }
-        if (agujeros >= cont && agu) { //Si este intervalo es mejor, actualizo la posicion, sino no
+        if (agujeros >= max && agu) { //Si este intervalo es mejor, actualizo la posicion, sino no
             p = z - intervalo + 1; //Actualizo el comienzo del intervalo, ya que este es mejor
+            max = agujeros;
         }
     }
     return p;
 }
-
 // Resuelve un caso de prueba, leyendo de la entrada la
 // configuración, y escribiendo la respuesta
 bool resuelveCaso() {
     // leer los datos de la entrada
-    int mv = -1; //Longitud (metros) de la vaya metálica
-    int lt = -1; //Longitud (metros) de la tela comprada
+    long int mv = -1; //Longitud (metros) de la vaya metálica
+    long int lt = -1; //Longitud (metros) de la tela comprada
     vector<int> valla;
     
     cin >> mv; //Leo metros valla
-    if (mv == 0)
+    if (mv == 0 || mv > 200000)
         return false;
     cin >> lt; //Leo letros tela comprada
     int aux = -1;
-    for (int i = 0; i < mv; i++) { //Lectura vector(valla)
+    for (long int i = 0; i < mv; i++) { //Lectura vector(valla)
         cin >> aux;
         valla.push_back(aux);
     }
