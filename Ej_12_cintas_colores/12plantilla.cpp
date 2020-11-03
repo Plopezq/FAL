@@ -1,5 +1,5 @@
-// Nombre del estudiante. 
-// Usuario del juez.
+// Nombre del estudiante: Pablo López
+// Usuario del juez: 4-40
 
 #include <iostream>
 #include <fstream>
@@ -15,27 +15,36 @@
 using psi = std::pair<char, int>;
 
 // Recibe un vector con los datos de entrada del problema
-// Modifica este vetor dejando en las primeras posiciones 
+// Modifica este veCtor dejando en las primeras posiciones 
 // las cintas azules, luego las verdes y uego las rojas
 // NO se puede utilizar sort
 // p es la primera posicion de una cinta verde, q es la ultima posicion de una cinta verde
 void particion (std::vector<psi> & v, int &p, int &q) {
     // Aqui codigo del estudiante
-
-
-
-
-
-
-
-
+    p = 0; //Delimita azul y verde
+    q = v.size() - 1; //delimita verde y rojo
+    int k = 0;
+    while (k <= q) {
+        if (v[k].first == 'v') { //Esta bien colocado el verde
+            ++k;
+        }
+        else if(v[k].first == 'a'){ //Esta bien colocado el rojo
+            swap(v[p], v[k]);
+            ++p;
+            ++k;
+        }
+        else {
+            swap(v[k], v[q]);
+            --q;
+        }
+    }
 }
 
 
 // Entrada y salida de datos
 bool resuelveCaso() {
     // Lectura de los datos de entrada
-    int numCintas;
+    long int numCintas;
     std::cin >> numCintas;
     if (!std::cin) return false;
     std::vector<psi> v(numCintas); // nombre y altura
@@ -75,7 +84,7 @@ bool resuelveCaso() {
 int main() {
 
 #ifndef DOMJUDGE
-    std::ifstream in("sample.in");
+    std::ifstream in("1.in");
     auto cinbuf = std::cin.rdbuf(in.rdbuf()); 
 #endif
     
@@ -85,6 +94,5 @@ int main() {
     std::cin.rdbuf(cinbuf);
     system("PAUSE");
 #endif
-∫    
     return 0;
 }
