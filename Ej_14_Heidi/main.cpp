@@ -30,7 +30,7 @@ vector<int> resolver(int &numVal, int &secMax, int &numLlan, vector<int> const &
             else if (longAct == numVal){ //tenemos una racha de numVal, nos vale
                 numLlan++;
                 
-                77posLlan.push_back(posSec);
+                posLlan.push_back(posSec);
             }
         }
         else { //Se rompe la racha
