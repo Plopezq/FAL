@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{fc9744d8-65fe-43db-9830-c2fe0a6e6e9e}</ProjectGuid>
-    <RootNamespace>ej24recursioneliminardigitospares</RootNamespace>
+    <ProjectGuid>{bbe2ad4f-3de5-412e-9cf3-6c4100e22907}</ProjectGuid>
+    <RootNamespace>pruebasrecursión</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -138,10 +138,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <None Include="1.in" />
-    <None Include="1.out" />
-  </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
   </ItemGroup>

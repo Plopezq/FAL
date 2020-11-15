@@ -5,20 +5,13 @@
 #include <iostream>
 #include <iomanip>
 #include <fstream>
+
 using namespace std;
 using lli = long long int;
-//Vale una solucion Final o una NO Final
-// función que resuelve el problema
-void resolverRecursiva(lli const num, int &sum) {
-    //Recursion final
 
-    //Caso base
-    if (num/10 < 1) {//Es el primer digito
-        ++sum;
-    }
-    else {//Caso recursivo
-        resolverRecursiva(num / 10, ++sum);
-    }
+// función que resuelve el problema
+lli resolver(lli const numero) {
+
 
 }
 
@@ -26,25 +19,30 @@ void resolverRecursiva(lli const num, int &sum) {
 // configuración, y escribiendo la respuesta
 bool resuelveCaso() {
     // leer los datos de la entrada
-    lli numero = -1;
-    cin >> numero;
+    lli num = -1;
+    cin >> num;
     if (!std::cin)
         return false;
-    int sol = 0;
-    resolverRecursiva(numero, sol);
+
+    lli sol = resolver(num);
+
     // escribir sol
-     cout << sol << endl;
+    cout << num << endl;
     return true;
+
 }
 
 int main() {
     // Para la entrada por fichero.
     // Comentar para acepta el reto
 #ifndef DOMJUDGE
-    std::ifstream in("1.in");
+    std::ifstream in("datos.txt");
     auto cinbuf = std::cin.rdbuf(in.rdbuf()); //save old buf and redirect std::cin to casos.txt
 #endif 
-    while (resuelveCaso());
+
+
+    while (resuelveCaso())
+        ;
 
 
     // Para restablecer entrada. Comentar para acepta el reto
