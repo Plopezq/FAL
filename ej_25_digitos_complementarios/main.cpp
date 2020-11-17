@@ -10,30 +10,26 @@ using namespace std;
 using lli = long long int;
 
 // función recursiva NO final que calcula el numero con los digitos complementarios
-lli rec1(lli numero) {
-
+lli rec1(lli const numero) { //Done
     //Caso base
     if (numero < 10) {
-        return (9 - numero);
-    }
-    //caso recursivo
+        return abs(9 - (numero % 10));
+    }//Caso recursivo
     else {
-        return rec1(numero / 10) * 10 + (9 - (numero % 10));
+        return rec1(numero / 10) * 10 + abs(9 - (numero % 10));
     }
 }
 
-//Funcion recursiva NO final que invierte el numero que recibe
-void rec2(lli numero) {
+//Funcion recursiva NO final que saca el complementario e invierte el numero 
+lli rec2(lli const numero, lli const acum) { //Falla con los 0
 
     //Caso base
-    if (numero < 10) {
-        cout << numero;
+    if (numero == 0) {
+        return acum;
+    }//Caso recursivo
+    else {
+        return rec2(numero / 10, acum * 10 + abs(9 - (numero % 10)));
     }
-    else { //caso recursivo
-        cout << numero % 10;
-        rec2(numero / 10);
-    }
-
 }
 
 // Resuelve un caso de prueba, leyendo de la entrada la
@@ -43,9 +39,9 @@ void resuelveCaso() {
     lli numero = -1;
     cin >> numero;
     lli num1 = rec1(numero);
-    //lli num2 = rec2(num1);
+    lli num2 = rec2(numero, 0);
     // escribir sol
-    cout << num1 << " " + rec2(num1) + "" << endl;
+    cout  << num1 << " " << num2  << endl;
 }
 
 int main() {
