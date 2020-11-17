@@ -16,7 +16,7 @@ lli resolver(lli numero) {
     //Caso base
     if (numero < 10) {
         if (numero %2 == 1) {//Si el numero es impar -> se saca
-            return (numero);
+            return numero;
         } //Si el numero es par -> NO se saca
     }
     //Caso recursivo
