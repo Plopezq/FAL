@@ -17,7 +17,10 @@ lli resolver(lli numero) {
     if (numero < 10) {
         if (numero %2 == 1) {//Si el numero es impar -> se saca
             return numero;
-        } //Si el numero es par -> NO se saca
+        }
+        else {//Si el numero es par -> NO se saca
+            return 0;
+        }
     }
     //Caso recursivo
     else { //Hacemos la trasnformacion del digito más debil
