@@ -8,9 +8,9 @@
 using namespace std;
 using lli = long long int;
 //Vale una solucion Final o una NO Final
-// función que resuelve el problema
+// función que cuenta el numero de digitos
 int resolverRecursiva(lli const num) {
-    //Recursion fina
+    //Recursion NO FINAL
     //Caso base
     if (num < 10) {//Es el primer digito
         return 1;
@@ -20,7 +20,17 @@ int resolverRecursiva(lli const num) {
     }
 
 }
+int resolverRecursiva2(lli const num, int const acumulador) {
+    //Recursion FINAL
+    //Caso base
+    if (num == 0) {//Es el primer digito
+        return acumulador;
+    }
+    else {//Caso recursivo
+        return  resolverRecursiva2(num / 10, acumulador + 1);
+    }
 
+}
 // Resuelve un caso de prueba, leyendo de la entrada la
 // configuración, y escribiendo la respuesta
 bool resuelveCaso() {
@@ -29,10 +39,11 @@ bool resuelveCaso() {
     cin >> numero;
     if (!std::cin)
         return false;
-    int sol;
-    sol = resolverRecursiva(numero);
+    int sol, sol2;
+    sol = resolverRecursiva(numero); //No final
+    sol2 = resolverRecursiva2(numero, 0); //Final
     // escribir sol
-     cout << sol << endl;
+     cout << sol2 << endl;
     return true;
 }
 
