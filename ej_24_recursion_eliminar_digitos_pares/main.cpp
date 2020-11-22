@@ -10,7 +10,6 @@ using namespace std;
 using lli = long long int;
 
 //Eliminar digitos pares, dejando solo los impares
-
 // función que resuelve el problema - solucion NO final
 lli resolver(lli numero) {
     //Caso base

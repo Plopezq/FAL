@@ -13,29 +13,23 @@ using namespace std;
 
 **/
 // función que resuelve el problema
-vector<int> resolver(int &numVal, int &secMax, int &numLlan, vector<int> const &datos) {
-    vector<int> posLlan; //Vector con el comienzo de cada llano encontrado (mirado desde la derecha)
+vector<int> resolver(vector<int> const& datos, int const lonVal, int& secMax) {
+    vector<int> posLlan; //Vector con el comienzo de cada llano encontrado (mirado desde la derecha) -> vector solucion a devolver
     int longAct = 1; //Longitud de la racha actual
-    secMax = 3; //Longitud de la secuencia maxima encontrada (secuencia mas larga)
+    secMax = -1; //Longitud de la secuencia maxima encontrada (secuencia mas larga)
     int posSec = 0;
-    for (int i = datos.size() - 1; i > 0; i-- ) { //Recorro el vector al reves
-        if (datos[i] == datos[i - 1]) {//Continua la racha
+    for (int i = datos.size() - 1; i > 0; i-- ) { //Recorro el vector al reves, desde la derecha
+        if (datos[i ] >= datos[i - 1] ) {//Continua la racha
             longAct++;
-            posSec = i + 1; //Almacenamos el comienzo de la racha, aunque solo lo guardaremos en el vector, si la racha resulta ser buena
-            if (longAct > numVal ) { //Nos vale la racha y encima es mayor que numVal, asique de lujo
-                numLlan++;
-                secMax = longAct;
-                //posLlan.push_back(posSec);
-            }
-            else if (longAct == numVal){ //tenemos una racha de numVal, nos vale
-                numLlan++;
-                
+            if (longAct >= lonVal ) { //Nos vale la racha y encima es mayor que numVal, asique de lujo
+                if (longAct > lonVal) { //La secuencia es maxima
+                    secMax = longAct;
+                }
+                posSec = datos.size() - i + longAct; //Almacenamos el comienzo de la racha que resulta valernos
                 posLlan.push_back(posSec);
             }
         }
-        else { //Se rompe la racha
-            //Comprobamos si nos es util la racha y la almacenamos
-            if (longAct > numVal) posLlan.push_back(posSec);
+        else {//Fin de la racha
             longAct = 1;
         }
     }
@@ -47,12 +41,12 @@ vector<int> resolver(int &numVal, int &secMax, int &numLlan, vector<int> const &
 bool resuelveCaso() {
     // leer los datos de la entrada
     int numDatos = -1; //Numero total de datos obtenidos
-    int numVal = -1; //Numero de valores iguales iguales que se necesitan para construir
+    int lonVal = -1; //Numero de valores iguales iguales que se necesitan para construir
     vector<int> datos;
     int aux = -1;
 
     cin >> numDatos;
-    cin >> numVal;
+    cin >> lonVal;
     for (int z = 0; z < numDatos; z++) {
         cin >> aux;
         datos.push_back(aux);
@@ -61,13 +55,17 @@ bool resuelveCaso() {
         return false;
 
     int secMax = -1; //Longitus de la secuencia de llanos mas larga
-    int numLlan = -1; //Numero de llanos encontrados
+    //Numero de llanos encontrados = sol.size()
 
-    vector<int> sol1 = resolver(numVal, secMax, numLlan, datos);
+    vector<int> sol; //Vector que indica el comienzo de los llanos encontrados
+    sol = resolver(datos, lonVal, secMax);
 
     // escribir sol
-
-
+    cout << secMax << " " << sol.size() ;
+    for (int z = 0; z < sol.size(); z++) {
+        cout << " " << sol[z];
+    }
+    cout << endl;
     return true;
 
 }
