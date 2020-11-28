@@ -10,19 +10,23 @@ using namespace std;
 
 // función que resuelve el problema
 char resolver(vector<char> const& datos, char ini, char fin) {
-
-    if (ini >= fin) return ini; // vector vacio -> CASO BASE
+    if (ini >= fin) {
+        return ini; // vector vacio
+    }
     else {
-        if ((ini + 1) == (fin)) {
+        if (ini + 1 == fin) {
             return ini; // vector un elemento
         }
-        else { // vector 2 o mas elementos
-            int mitad = (ini + fin) / 2;
-            if ( ((datos[mitad - ini] ) - 'a') < (mitad - 'a') ) { //Busco en la mitad izquierda
-                return resolver(datos, ini, mitad);
+        if (ini + 2 == fin) { //Aqui esta el error
+            return ini + 1;
+        }
+        else { // vector 2 o mas elemento
+            int mitad = ((ini-ini) + (fin-ini)) / 2;
+            if ( (datos[mitad] - ini) == (mitad - (ini-ini)) ) { //La parte izquierda es Correcta
+                return resolver(datos,datos[mitad], fin);
             }
-            else { //Busco en la mitad derecha
-                return resolver(datos, mitad, fin);
+            else {//En la parte izquierda esta el error
+                return resolver(datos, ini, datos[mitad]);
             }
         }
     }
@@ -43,7 +47,7 @@ void resuelveCaso() {
         cin >> aux;
         datos.push_back(aux);
     }
-    char sol = resolver(datos, x1, x2);
+    char sol = resolver(datos, x1, x2 );
     // escribir sol
     cout << sol << endl;
 
