@@ -10,24 +10,18 @@ using namespace std;
 
 // función que resuelve el problema
 char resolver(vector<char> const& datos, char ini, char fin) {
-    if (ini >= fin) {
-        return ini; // vector vacio
+
+    //Caso base -> el vector de dos elementos
+    if (ini + 1 == fin) { 
+        return datos[ini] + 1;
     }
-    else {
-        if (ini + 1 == fin) {
-            return ini; // vector un elemento
+    else { // Funcion recursiva --> vector 2 o mas elemento
+        int mitad = (ini + fin) / 2;
+        if ( datos[mitad] == char(mitad + datos[0]) ) { //La parte izquierda es Correcta, ya que la mitad esta en su sitio
+            return resolver(datos, mitad, fin);
         }
-        if (ini + 2 == fin) { //Aqui esta el error
-            return ini + 1;
-        }
-        else { // vector 2 o mas elemento
-            int mitad = ((ini-ini) + (fin-ini)) / 2;
-            if ( (datos[mitad] - ini) == (mitad - (ini-ini)) ) { //La parte izquierda es Correcta
-                return resolver(datos,datos[mitad], fin);
-            }
-            else {//En la parte izquierda esta el error
-                return resolver(datos, ini, datos[mitad]);
-            }
+        else {//En la parte izquierda esta el error
+            return resolver(datos, ini, mitad);
         }
     }
 }
@@ -47,9 +41,20 @@ void resuelveCaso() {
         cin >> aux;
         datos.push_back(aux);
     }
-    char sol = resolver(datos, x1, x2 );
-    // escribir sol
-    cout << sol << endl;
+    //Comprobamos la precondicion de que ninguno de los extremos es el prisionero fugado
+    if (datos[0] != x1) { //Compruebo si el del extremo izquierda es el fugado
+        //El fugado es el primero
+        cout << x1 << endl;
+    }
+    else if (datos[datos.size()-1] != x2) { //Compruebo si el del extremo derecha es el fugado
+        //El fugado es el ultimo
+        cout << x2 << endl;
+    }
+    else { //Ningun extremo es el fugado
+        char sol = resolver(datos, 0, datos.size());
+        // escribir sol
+        cout << sol << endl;
+    }
 
 }
 
