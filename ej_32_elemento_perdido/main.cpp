@@ -16,6 +16,9 @@ using namespace std;
 TipoSolucion resolver(TipoDatos datos) {
 
 
+
+
+
 }
 
 // Resuelve un caso de prueba, leyendo de la entrada la
@@ -34,7 +37,7 @@ int main() {
     // Para la entrada por fichero.
     // Comentar para acepta el reto
 #ifndef DOMJUDGE
-    std::ifstream in("datos.txt");
+    std::ifstream in("1.in");
     auto cinbuf = std::cin.rdbuf(in.rdbuf()); //save old buf and redirect std::cin to casos.txt
 #endif 
 
