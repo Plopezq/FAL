@@ -14,13 +14,18 @@ using namespace std;
 
 // función que resuelve el problema
 int resolver(vector<int> const & v1, vector<int> const& v2, int ini, int fin) {
-
     if (ini + 1 == fin) { //Caso base -> vector de 1 elemento
-        return v1[fin];
+        if (v1[ini] == v2[ini]) { //El que falta es el de la derecha de los dos elementos de v1
+            return v1[fin];
+        }
+        else { //El que falta es el de la izquierda de los dos elementos
+            return v1[ini];
+
+        }
     }
     else { //Caso recursivo
         int mitad = (ini + fin) / 2;
-        if (v1[mitad] > v2[mitad]) { // El elemento perdido esta en la derecha
+        if (v1[mitad] >= v2[mitad]) { // El elemento perdido esta en la derecha
             return resolver(v1, v2, mitad, fin);
         }
         else { //El elemento perdido esta en la izquierda, si es menor o igual
@@ -47,21 +52,11 @@ void resuelveCaso() {
         v2.push_back(aux);
     }
     int sol = -1;
-
+    
     if (v1.size() == 1) { //Si el vector 1 tiene longitud 1, esta claro que el segundo tiene longitud 0
         sol = v1[0];
     }else {
-    //PRECONDICIONES ---- MUY IMPORTANTES EN ESTE TIPO DE EJERCICIOS
-      //Compruebo que no faltan los extremos, ya que si es asi, no llamamos a la funcion recursiva
-      if (v1[0] != v2[0]) { //El elemento perdido es v1[0]
-          sol = v1[0];
-      }
-      else if (v1[v1.size() - 1] != v2[v2.size() - 1]) {
-          sol = v1[v1.size() - 1];
-      }
-      else {
-          sol = resolver(v1, v2, 0, v2.size()); //Le paso el tamaño de v2
-      }
+        sol = resolver(v1, v2, 0, v2.size()); //Le paso el tamaño de v2
     }
   
 
