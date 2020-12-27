@@ -20,7 +20,7 @@ void escribirSol(vector < char> const& sol) {
 void variaciones(int m, int n, int k, vector<char>& sol, vector<bool>& marcas) {
     for (char i = 'a'; i < 'a' + m; ++i) {
         sol[k] = i;
-        if (marcas[i - 'a'] == false) { //Es valida, la letra no esta marcada
+        if (!marcas[i - 'a']) { //Es valida, la letra no esta marcada
             marcas[i - 'a'] = true; //Marcamos
             if (k == (n - 1)) { //Es solucion
                 escribirSol(sol);
@@ -28,8 +28,8 @@ void variaciones(int m, int n, int k, vector<char>& sol, vector<bool>& marcas) {
             else {//Sigue completando la solucion
                 variaciones(m, n, k + 1, sol, marcas);
             }
+            marcas[i - 'a'] = false; //Desmarcamos
         }
-        marcas[i - 'a'] = false; //Desmarcamos
     }
 }
 
