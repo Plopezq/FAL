@@ -43,14 +43,20 @@ bool permutaciones(int const altura, int k, vector<int>& sol, vector<int>& numPi
     bool posible = false;
     for (int i = 0; i < 3; i++) {
         sol[k] = i;
-        if (esValida(i,k, sol, numPiezasRest, numPiezasColo)) {//No tiene dos verdes seguidos
+        if (esValida(i, k, sol, numPiezasRest, numPiezasColo)) {//No tiene dos verdes seguidos
             ++numPiezasColo[i]; //Incremento las piezas puestas de ese color
+            --numPiezasRest[i];
             if (k == (altura - 1)) { //Es solucion, tiene la altura deseada
-                if (numPiezasColo[1] > (numPiezasColo[0] + numPiezasColo[2])) { //El numero de piezas rojas, debe ser mayor que la suma de las piezas azules y verdes
+                //El numero de piezas rojas, debe ser mayor que la suma de las piezas azules y verdes
+                if (numPiezasColo[1] > (numPiezasColo[0] + numPiezasColo[2])) { 
                     escribirSol(sol);
                     posible = true;
                 }
                 //Volvemos a tener todas las piezas disponibles
+                numPiezasRest[0] += numPiezasColo[0];
+                numPiezasRest[1] += numPiezasColo[1];
+                numPiezasRest[2] += numPiezasColo[2];
+                //El vector de piezas colocadas es todo 0
                 numPiezasColo.assign(3, 0);
             }
             else {
@@ -82,10 +88,13 @@ bool resuelveCaso() {
     vector<int> numPiezasColo; //Vector que nos dice las piezas colocadas de cada color
     numPiezasColo.assign(3, 0);
 
-    bool posible;
-    sol[0] = 1; //pongo el rojo en la base, si tengo de color rojo
-    if (numPiezasRest[1] > 0) ++numPiezasColo[1];
-    if (altura > 1) {
+    bool posible = false;
+    if (numPiezasRest[1] > 0) { //Si tengo piezas de color rojo
+        sol[0] = 1; //pongo el rojo en la base, si tengo de color rojo
+        --numPiezasRest[1];
+        ++numPiezasColo[1];
+    }
+    if (altura > 1) { //Aqui posible = true
         posible = permutaciones(altura, 1, sol, numPiezasRest, numPiezasColo);
     }
     else {
