@@ -31,7 +31,7 @@ bool esValida(const int i,const int k, vector<int>& sol, vector<int>& numPiezasR
     //Comprobamos que tiene disponible alguna pieza de ese color
     if ( numPiezasRest[i] <= 0) return false;
     //Comprobamos que nunca se ponen 2 piezas verdes juntas
-    if (k > 0 && sol[k] == 2 && sol[k] == sol[k - 1]) return false;
+    if (k < (sol.size() - 1) && sol[k] == 2 && sol[k] == sol[k + 1]) return false;
     //Comprobamos que no coloca mas piezas verdes que azules
     if (numPiezasColoc[2] > numPiezasColoc[0]) return false;
 
@@ -39,35 +39,28 @@ bool esValida(const int i,const int k, vector<int>& sol, vector<int>& numPiezasR
 }
 
 // función que resuelve el problema
-bool permutaciones(int const altura, int k,  vector<int>& sol,  vector<int>& numPiezasRest,  vector<int>& numPiezasColo) {
-    bool posible = false;
+void permutaciones(int const altura, int k,  vector<int>& sol,  vector<int>& numPiezasRest,  vector<int>& numPiezasColo, int &numSol) {
     for (int i = 0; i < 3; i++) {
         sol[k] = i;
         if (esValida(i, k, sol, numPiezasRest, numPiezasColo)) {//Comprobamos las restricciones
+            //MARCAMOS
             ++numPiezasColo[i]; //Incremento las piezas puestas de ese color
             --numPiezasRest[i]; //Decremento las piezas restantes de ese color
             if (k == (altura - 1)) { //Es solucion, tiene la altura deseada
                 //El numero de piezas rojas, debe ser mayor que la suma de las piezas azules y verdes
                 if (numPiezasColo[1] > (numPiezasColo[0] + numPiezasColo[2])) {//SI es solucion
                     escribirSol(sol);
-                    posible = true;
+                    ++numSol;
                 }
-                //NO es solucion
-                //Volvemos a tener la pieza k disponible
-                ++numPiezasRest[i];
-                //El vector de piezas colocadas es todo 0
-                --numPiezasColo[i];
             }
             else {
-                permutaciones(altura, k + 1, sol, numPiezasRest, numPiezasColo);
-                //Volvemos a tener la pieza i disponible
-                ++numPiezasRest[i];
-                //Ya no esta colocada la pieza i
-                --numPiezasColo[i];
+                permutaciones(altura, k + 1, sol, numPiezasRest, numPiezasColo, numSol);
             }
+            //DESMARCAMOS
+            --numPiezasColo[i];
+            ++numPiezasRest[i];
         }
     }
-    return posible;
 }
 
 // Resuelve un caso de prueba, leyendo de la entrada la
@@ -92,20 +85,19 @@ bool resuelveCaso() {
     vector<int> numPiezasColo; //Vector que nos dice las piezas colocadas de cada color
     numPiezasColo.assign(3, 0);
 
-    bool posible = false;
+    int numSol = 0;
     if (numPiezasRest[1] > 0) { //Si tengo piezas de color rojo
         sol[0] = 1; //pongo el rojo en la base
         --numPiezasRest[1];
         ++numPiezasColo[1];
     }
     if (altura > 1) { //Aqui posible = true
-        posible = permutaciones(altura, 1, sol, numPiezasRest, numPiezasColo);
+        permutaciones(altura, 1, sol, numPiezasRest, numPiezasColo, numSol);
     }
-    else {
+    if(numSol >0) {
         escribirSol(sol);
-    }
-    if (!posible) {
-        cout << "SIN SOLUCION";
+    }else {
+        cout << "SIN SOLUCION" << endl;
     }
     cout << endl;
 
