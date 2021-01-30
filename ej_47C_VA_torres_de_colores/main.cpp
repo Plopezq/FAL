@@ -94,9 +94,7 @@ bool resuelveCaso() {
     if (altura > 1) { //Aqui posible = true
         permutaciones(altura, 1, sol, numPiezasRest, numPiezasColo, numSol);
     }
-    if(numSol >0) {
-        escribirSol(sol);
-    }else {
+    if(numSol == 0) {
         cout << "SIN SOLUCION" << endl;
     }
     cout << endl;
