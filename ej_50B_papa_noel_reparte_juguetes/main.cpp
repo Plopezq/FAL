@@ -35,12 +35,22 @@ void escribirSol(vector<int> sol) {
     cout << endl;
 }
 
-
+bool satisface(vector<int> sol, tDatos d) {
+    int nyno = 0; //
+    for (int z = 0; z < sol.size(); z+=2 ) { //Sumo 2 ya que cada niño tendra 2 juguetes
+        int sum = 0;
+        sum += d.satis[nyno][sol[z]]; //Sumo la satisfaccion que le produce a ese niño, ese juguete
+        sum += d.satis[nyno][sol[z + 1]]; //Sumo la satisfaccion que le produce a ese niño, ese juguete
+        if (sum < d.minSat) return false;
+        nyno++;
+    }
+    return true;
+}
 bool esValida(vector<int>& sol, int k, int i, tDatos& d) {
     //Un ninyo no puede tener dos juguetes de un mismo tipo
     if ((k % 2) == 1 && d.tipoJuguetes[sol[k - 1]] >= d.tipoJuguetes[sol[k]]) return false;
-
-    
+    //Hay unidades de ese juguete
+    if (d.unidadesJuguetes[sol[k]] < 0) return false;
     return true;
 }
 //En cada etapa intentamos repartir todos los juguetes
@@ -49,17 +59,21 @@ int reparte(vector<int>& sol, int k, tDatos& d) {
     int numSol = 0;
     for (int i = 0; i < d.numJuguetes; i++) {
         sol[k] = i;
-        //Aqui se marcaria
+        //Aqui se marcaria --> restamos las unidades de ese juguete
+        --d.unidadesJuguetes[i];
         if (esValida(sol, k, i, d)) { //Es valida
             if (k == (sol.size() - 1)) { //Es solucion
-                numSol++;
-                escribirSol(sol);
+                if (satisface(sol, d)) {
+                    numSol++;
+                    escribirSol(sol);
+                }
             }
             else {
                 numSol += reparte(sol, k + 1, d);
             }
         }
         //Aqui se desmarcaria
+        ++d.unidadesJuguetes[i];
     }
     return numSol;
 }
@@ -101,7 +115,7 @@ bool resuelveCaso() {
 
     // LLamar a la funcion de vuelta atras
     vector<int> sol;
-    sol.resize(d.numNin * 2); //Cada ninyo tendra dos juguetes
+    sol.assign(d.numNin * 2, -1); //Cada ninyo tendra dos juguetes
     int k = 0;
     int numSol = 0;
     numSol = reparte(sol, k, d);
