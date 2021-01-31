@@ -28,12 +28,13 @@ void escribirSol(vector<int> const& solucion) {
 bool esValida(const int i,const int k, vector<int>& sol, vector<int>& numPiezasRest, vector<int>& numPiezasColoc) {
     /** i --> el color de la pieza a colocar **/
     /** k -> la posicion en el arbol de soluciones */
-    //Comprobamos que tiene disponible alguna pieza de ese color
-    if ( numPiezasRest[i] <= 0) return false;
     //Comprobamos que nunca se ponen 2 piezas verdes juntas
-    if (k >0 && k < sol.size() && sol[k] == 2 && sol[k] == sol[k - 1]) return false;
+    if (k > 0 && sol[k] == 2 && sol[k - 1] == 2) return false;
     //Comprobamos que no coloca mas piezas verdes que azules
     if (numPiezasColoc[2] > numPiezasColoc[0]) return false;
+    //Comprobamos que tiene disponible alguna pieza de ese color
+    if ( numPiezasRest[i] <= 0) return false;
+
 
     return true;
 }
