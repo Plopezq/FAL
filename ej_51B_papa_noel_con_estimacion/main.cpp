@@ -32,7 +32,7 @@ struct tSol {
 
 //En cada etapa intentamos repartir todos los juguetes
 // Aqui las funciones implementadas por el alumno
-void reparte(tDatos &datos, int k, tSol &sol, vector<bool> &marcas, int &satisMejor, vector<int> &acum) {
+void reparte(tDatos& datos, int k, tSol& sol, vector<bool>& marcas, int& satisMejor, vector<int>& acum) {
     for (int i = 0; i < datos.numJuguetes; i++) {
         sol.sol[k] = i;
         if (!marcas[i]) { //Es valida -> cuando ese juguete no ha sido usado
@@ -46,8 +46,8 @@ void reparte(tDatos &datos, int k, tSol &sol, vector<bool> &marcas, int &satisMe
                 }
             }
             else { //NO es solucion 
-                //if (sol.sumaSatis + acum[k+1] > satisMejor) //ESTIMAMOS -> solo seguimos si la solucion va a mejorar, sino no
-                    reparte(datos, k + 1, sol, marcas, satisMejor, acum);
+                if (sol.sumaSatis + acum[k+1] > satisMejor) //ESTIMAMOS -> solo seguimos si la solucion va a mejorar, sino no
+                reparte(datos, k + 1, sol, marcas, satisMejor, acum);
             }
             //quito la satisfaccion del jguete anterior
             sol.sumaSatis -= datos.satis[k][i];
@@ -87,7 +87,7 @@ bool resuelveCaso() {
     }
 
     //Calculo el vector de acumulados de las satisfacciones maximas de los ninyos --> en este caso desde el final al principio
-    for (int i = (acum.size() - 1); i > 0 ; i--) {
+    for (int i = (acum.size() - 1); i > 0; i--) {
         acum[i - 1] += acum[i];
     }
 
