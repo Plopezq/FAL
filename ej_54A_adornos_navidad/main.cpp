@@ -113,7 +113,7 @@ bool resuelveCaso() {
     int superficieMejor = inicializarSuperficie(d, d.pres);
     std::vector <bool > solMejor;
     resolver(d, 0, sol, costeAct, superficieAct, solMejor, superficieMejor);
-    //std:: cout << solMejor; 
+    std:: cout << solMejor; 
     std:: cout << superficieMejor << '\n'; 
     return true;
 
