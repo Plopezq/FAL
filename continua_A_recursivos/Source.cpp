@@ -6,40 +6,50 @@
 #include <iomanip>
 #include <fstream>
 
-
 using namespace std;
 
-// función que resuelve el problema
-//RECURSION NO FINAL
-int resolver(int numero) {
-    if (numero < 10) {//caso base
-        return (numero * 10) + numero;
+int suma(int n1, int n2) {
+    return (n1 + n2) % 10;
+}
+
+
+// recursion NO FINAL
+int resolver(int num1, int num2) {
+
+    if (num1 < 10 && num2 < 10) { //caso base 
+        return suma(num1, num2);
     }
-    else {//caso recursivo
-        return resolver(numero/10) * 100 + (numero % 10 * 10 + numero % 10)  ;
+    else {// caso recursivo
+        return resolver(num1 / 10, num2 / 10) * 10 + suma(num1%10, num2%10);
     }
 
 }
-//recursion final
-int resolver2(int numero, int acum) {
-    if (numero == 0) {//caso base
-        return acum;
+
+//recursion FINAL
+int resolver2(int num1, int num2, int acum, int pot) {
+
+    if (num1 < 10 && num2 < 10) { //caso base 
+        return suma(num1, num2) * pot + acum;
     }
-    else {//caso recursivo
-        return resolver2(numero / 10, acum * 100 + (numero % 10 * 10 + numero % 10));
+    else {// caso recursivo
+        return resolver2(num1 / 10, num2 / 10,  suma(num1 % 10, num2 % 10) * pot + acum * 10, pot * 10) ;
     }
+
 }
+
 // Resuelve un caso de prueba, leyendo de la entrada la
 // configuración, y escribiendo la respuesta
 void resuelveCaso() {
     // leer los datos de la entrada
-    int num;
-    cin >> num;
+    int num1;
+    int num2;
+    cin >> num1;
+    cin >> num2;
 
-    int sol1 = resolver(num);
-    int sol2 = resolver2(num, 0);
+    //int sol = resolver2(num1, num2, 0, 1);
+    int sol = resolver(num1, num2);
     // escribir sol
-    cout << sol1 << " " << sol2 << endl;
+    cout << sol << " " << sol << endl;
 
 }
 
