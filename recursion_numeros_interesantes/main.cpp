@@ -23,24 +23,24 @@ using namespace std;
 //
 //*******************************
 
-typedef struct {
-    bool interesante;
-    int acum = 0;
-}tSol;
+
 // Aqui la funcion que resuelve el problema
-tSol resolver(int numero) {
+bool resolver(int n, int suma, int aux) {
     
-    if (numero < 10) { //Caso base -> numero de 1 digito
-        if () {
+    int num = n / 10;
+    int dig = n % 10;
 
-        }
-    }
-    else {
-        return resolver(numero / 10);
-    }
+    int p = suma - dig; // izquierda
+    int q = aux + dig; //derecha
 
-
-
+    bool vacio = false, drcha = false, izq = false;
+    if (dig != 0) vacio = true;
+    if (aux % dig == 0) drcha = true;
+    if (p % dig == 0) izq = true;
+    if (num == 0)
+        return vacio && drcha && izq;
+    else
+        return vacio && drcha && izq && resolver(num, p, q);
 
 }
 
@@ -54,7 +54,7 @@ void resuelveCaso() {
     cin >> numero;
     
     // LLamar a la función que resuelve el problema
-    bool sol = resolver(numero);
+    bool sol = resolver(numero, 0, 0);
     
     // Escribir el resultado
     if (sol) {
