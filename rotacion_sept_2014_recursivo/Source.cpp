@@ -14,15 +14,15 @@ int resolver(vector<int> const &datos, int const ini, int const fin) {
 
     //caso base - vector de dos elementos
     if (ini + 1 == fin) {
-
+        return datos[ini];
     }
     else {//caso recursivo
         int mitad = (ini + fin) / 2;
-        if () {
-
+        if (datos[mitad] > datos[0]) { //buscamos en la izquierda
+            return resolver(datos, ini, mitad);
         }
-        else {
-
+        else { //buscamos en la derecha
+            return resolver(datos, mitad, fin);
         }
     }
 }
